@@ -2613,8 +2613,10 @@ MonoBehaviour:
   Player: {fileID: 306098222}
   TriggerName: Idle
   Animation3: {fileID: 1250675432}
-  triggerSound: {fileID: 0}
-  audioSource: {fileID: 0}
+  triggerSound: {fileID: 8300000, guid: c785ef53a31c20c499a01520d668af5d, type: 3}
+  volume: 0
+  pitch: 0
+  audioSource: {fileID: 1250675435}
 --- !u!82 &1250675435
 AudioSource:
   m_ObjectHideFlags: 0
