@@ -8,10 +8,17 @@ public class Silly : MonoBehaviour
     float Distance = 2f;
     bool IsAnimation;
     bool WasInRange;
+
+    public AudioClip triggerSound;
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Animation3 = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
     }
 
     // Update is called once per frame
@@ -23,6 +30,7 @@ public class Silly : MonoBehaviour
         {
             Animation3.SetTrigger("Silly");
             IsAnimation = true;
+            audioSource.PlayOneShot(triggerSound);
             Debug.Log("anim");
 
         }
