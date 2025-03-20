@@ -15,12 +15,44 @@ public class TriggerDefeated : MonoBehaviour
     bool isAnimation;
     bool defeatedisplaying;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AudioClip triggerSound;
+
+    [Range(0f, 1f)]
+    public float volume;
+
+    [Range(0f, 2.5f)]
+    public float pitch;
+
+    public AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource.playOnAwake = false;
+    }
     void Start()
     {
         Defeat = GetComponent<Animator>();
         //defeatedHash = Animator.StringToHash("Base Layer.Defeated");
-        
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
+        volume = 0.5f;
+        pitch = 1f;
+
+        audioSource.clip = triggerSound;
+        audioSource.volume = volume;
+        audioSource.pitch = pitch;
+    }
+    void PlayandPause()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
     }
 
     // Update is called once per frame
@@ -32,30 +64,34 @@ public class TriggerDefeated : MonoBehaviour
         //float durée = StatInfo.length;
         //float duréetotal = StatIn.fullPathHash;
         //Debug.Log(distance);
-        if (InRange && !WasInRange && !isAnimation)
+        if (InRange)
         {
-            Defeat.SetTrigger("Defeated");
-            isAnimation = true;
-            Debug.Log("anim");
-            defeatedisplaying = true;
-        }
-        //if (!InRange && !isAnimation && !defeatedisplaying)
-        //{
-        //    Defeat.SetTrigger("Idle");
-        //    isAnimation = true;
-        //    Debug.Log("idle");
-        //}
-        if (isAnimation)
-        {
-            AnimatorStateInfo StatInfo = Defeat.GetCurrentAnimatorStateInfo(0);
-            if (StatInfo.normalizedTime >= 1f)
+            if (!WasInRange && !isAnimation)
             {
-                isAnimation = false;
-                Debug.Log("pasanim");
-                defeatedisplaying = false;
-                Defeat.SetTrigger("Idle");
+                Defeat.SetTrigger("Defeated");
+                isAnimation = true;
+                PlayandPause();
+                Debug.Log("anim");
+
+            }
+            //Defeat.ResetTrigger("Silly");
+            if (isAnimation)
+            {
+                AnimatorStateInfo StatInfo = Defeat.GetCurrentAnimatorStateInfo(0);
+                if (StatInfo.normalizedTime >= 1f)
+                {
+                    isAnimation = false;
+                    Debug.Log("pasanim");
+                }
             }
         }
-       WasInRange = InRange;
+        if (!InRange && WasInRange)
+        {
+            Defeat.Rebind();
+            audioSource.Stop();
+            isAnimation = false;
+            Debug.Log("pasanim");
+        }
+        WasInRange = InRange;
     }
 }

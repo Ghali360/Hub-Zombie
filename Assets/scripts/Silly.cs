@@ -19,7 +19,10 @@ public class Silly : MonoBehaviour
 
     public AudioSource audioSource;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        audioSource.playOnAwake = false;
+    }
     void Start()
     {
         Animation3 = GetComponent<Animator>();
@@ -74,9 +77,9 @@ public class Silly : MonoBehaviour
                 }
             }
         }
-        else
+        if (!InRange && WasInRange) 
         {
-            Animation3.ResetTrigger("Silly");
+            Animation3.Rebind();
             audioSource.Stop();
             IsAnimation = false;
             Debug.Log("pasanim");

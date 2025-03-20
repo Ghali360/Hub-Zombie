@@ -10,33 +10,77 @@ public class Drunk : MonoBehaviour
     bool IsAnimation;
     bool WasInRange;
 
+    public AudioClip triggerSound;
+
+    [Range(0f, 1f)]
+    public float volume;
+
+    [Range(0f, 2.5f)]
+    public float pitch;
+
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        audioSource.playOnAwake = false;
+    }
     void Start()
     {
         Animation1 = GetComponent<Animator>();
-    }
 
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
+        volume = 0.5f;
+        pitch = 1f;
+
+        audioSource.clip = triggerSound;
+        audioSource.volume = volume;
+        audioSource.pitch = pitch;
+    }
+    void PlayandPause()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         float distance = Vector3.Distance(Player.transform.position, transform.position);
         bool InRange = distance < Distance;
-        if (InRange && !WasInRange && !IsAnimation)
+        if (InRange)
         {
-            Animation1.SetTrigger("drunk");
-            IsAnimation = true;
-            Debug.Log("anim");
-
-        }
-        if (IsAnimation)
-        {
-            AnimatorStateInfo StatInfo = Animation1.GetCurrentAnimatorStateInfo(0);
-            if (StatInfo.normalizedTime >= 1f)
+            if (!WasInRange && !IsAnimation)
             {
-                IsAnimation = false;
-                Debug.Log("pasanim");
-                Animation1.SetTrigger("Idle");
+                Animation1.SetTrigger("drunk");
+                IsAnimation = true;
+                PlayandPause();
+                Debug.Log("anim");
+
             }
+            //Animation1.ResetTrigger("Silly");
+            if (IsAnimation)
+            {
+                AnimatorStateInfo StatInfo = Animation1.GetCurrentAnimatorStateInfo(0);
+                if (StatInfo.normalizedTime >= 1f)
+                {
+                    IsAnimation = false;
+                    Debug.Log("pasanim");
+                }
+            }
+        }
+        if (!InRange && WasInRange)
+        {
+            Animation1.Rebind();
+            audioSource.Stop();
+            IsAnimation = false;
+            Debug.Log("pasanim");
         }
         WasInRange = InRange;
     }
