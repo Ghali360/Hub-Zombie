@@ -19,7 +19,7 @@ public class TriggerDefeated : MonoBehaviour
     void Start()
     {
         Defeat = GetComponent<Animator>();
-        defeatedHash = Animator.StringToHash("Base Layer.Defeated");
+        //defeatedHash = Animator.StringToHash("Base Layer.Defeated");
         
     }
 
@@ -28,7 +28,7 @@ public class TriggerDefeated : MonoBehaviour
     {
         float distance = Vector3.Distance(Player.transform.position, transform.position);
         bool InRange = distance < Distance;
-        int  hash = Animator.StringToHash("Defeated");       
+        //int  hash = Animator.StringToHash("Defeated");       
         //float durée = StatInfo.length;
         //float duréetotal = StatIn.fullPathHash;
         //Debug.Log(distance);

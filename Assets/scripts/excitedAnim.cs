@@ -1,19 +1,17 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Drunk : MonoBehaviour
+public class excitedAnim : MonoBehaviour
 {
     public GameObject Player;
     public string TriggerName = "Idle";
-    public Animator Animation1;
+    public Animator Animation2;
     float Distance = 2f;
     bool IsAnimation;
     bool WasInRange;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Animation1 = GetComponent<Animator>();
+        Animation2 = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -23,19 +21,19 @@ public class Drunk : MonoBehaviour
         bool InRange = distance < Distance;
         if (InRange && !WasInRange && !IsAnimation)
         {
-            Animation1.SetTrigger("drunk");
+            Animation2.SetTrigger("excited");
             IsAnimation = true;
             Debug.Log("anim");
 
         }
         if (IsAnimation)
         {
-            AnimatorStateInfo StatInfo = Animation1.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo StatInfo = Animation2.GetCurrentAnimatorStateInfo(0);
             if (StatInfo.normalizedTime >= 1f)
             {
                 IsAnimation = false;
                 Debug.Log("pasanim");
-                Animation1.SetTrigger("Idle");
+                Animation2.SetTrigger("Idle");
             }
         }
         WasInRange = InRange;
