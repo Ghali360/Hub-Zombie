@@ -6,7 +6,7 @@ public class Drunk : MonoBehaviour
     public GameObject Player;
     public string TriggerName = "Idle";
     public Animator Animation1;
-    float Distance = 2f;
+    [SerializeField] float Distance;
     bool IsAnimation;
     bool WasInRange;
 
@@ -30,6 +30,10 @@ public class Drunk : MonoBehaviour
     }
     void Start()
     {
+        Vector3 newPos = transform.position;
+        newPos.y = 0.7f;
+        transform.position = newPos;
+
         Animation1 = GetComponent<Animator>();
 
         audioSource = GetComponent<AudioSource>();
@@ -59,6 +63,10 @@ public class Drunk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 newPos = transform.position;
+        newPos.y = 0.7f;
+        transform.position = newPos;
+
         float distance = Vector3.Distance(Player.transform.position, transform.position);
         bool InRange = distance < Distance;
         if (InRange)
