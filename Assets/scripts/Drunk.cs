@@ -23,6 +23,7 @@ public class Drunk : MonoBehaviour
     [Header("Billboard Settings")]
     public GameObject BillBoard;
 
+    public GameObject fxGameObject;
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -42,7 +43,7 @@ public class Drunk : MonoBehaviour
         audioSource.pitch = pitch;
 
         BillBoard.SetActive(false);
-
+        fxGameObject.SetActive(false);
     }
     void PlayandPause()
     {
@@ -69,6 +70,7 @@ public class Drunk : MonoBehaviour
                 PlayandPause();
                 Debug.Log("anim");
                 BillBoard.SetActive(true);
+                fxGameObject.SetActive(true);
             }
             //Animation1.ResetTrigger("Silly");
             if (IsAnimation)
@@ -88,6 +90,7 @@ public class Drunk : MonoBehaviour
             IsAnimation = false;
             Debug.Log("pasanim");
             BillBoard.SetActive(false);
+            fxGameObject.SetActive(false);
         }
         WasInRange = InRange;
     }

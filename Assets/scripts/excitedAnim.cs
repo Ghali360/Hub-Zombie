@@ -22,6 +22,8 @@ public class excitedAnim : MonoBehaviour
     [Header("Billboard Settings")]
     public GameObject BillBoard;
 
+    public GameObject fxGameObject;
+
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -40,7 +42,7 @@ public class excitedAnim : MonoBehaviour
         audioSource.pitch = pitch;
 
         BillBoard.SetActive(false);
-
+        fxGameObject.SetActive(false);
     }
     void PlayandPause()
     {
@@ -68,6 +70,7 @@ public class excitedAnim : MonoBehaviour
                 PlayandPause();
                 Debug.Log("anim");
                 BillBoard.SetActive(true);
+                fxGameObject.SetActive(true);
             }
             //Animation2.ResetTrigger("Silly");
             if (IsAnimation)
@@ -87,6 +90,7 @@ public class excitedAnim : MonoBehaviour
             IsAnimation = false;
             Debug.Log("pasanim");
             BillBoard.SetActive(false);
+            fxGameObject.SetActive(false);
         }
         WasInRange = InRange;
     }

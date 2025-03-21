@@ -28,6 +28,7 @@ public class TriggerDefeated : MonoBehaviour
     [Header("Billboard Settings")]
     public GameObject BillBoard;
 
+    public GameObject fxGameObject;
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -47,6 +48,7 @@ public class TriggerDefeated : MonoBehaviour
         audioSource.pitch = pitch;
 
         BillBoard.SetActive(false);
+        fxGameObject.SetActive(false);
 
     }
     void PlayandPause()
@@ -79,6 +81,7 @@ public class TriggerDefeated : MonoBehaviour
                 PlayandPause();
                 Debug.Log("anim");
                 BillBoard.SetActive(true);
+                fxGameObject.SetActive(true);
             }
             //Defeat.ResetTrigger("Silly");
             if (isAnimation)
@@ -98,6 +101,7 @@ public class TriggerDefeated : MonoBehaviour
             isAnimation = false;
             Debug.Log("pasanim");
             BillBoard.SetActive(false);
+            fxGameObject.SetActive(false);
         }
         WasInRange = InRange;
     }

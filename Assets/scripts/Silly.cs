@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Silly : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class Silly : MonoBehaviour
 
     public AudioSource audioSource;
 
-    [Header("Billboard Settings")]
     public GameObject BillBoard;
+
+    public GameObject fxGameObject;
 
     private void Awake()
     {
@@ -41,7 +43,7 @@ public class Silly : MonoBehaviour
         audioSource.pitch = pitch;
 
         BillBoard.SetActive(false);
-
+        fxGameObject.SetActive(false);
     }
 
     void PlayandPause()
@@ -70,6 +72,7 @@ public class Silly : MonoBehaviour
                 PlayandPause();
                 Debug.Log("anim");
                 BillBoard.SetActive(true);
+                fxGameObject.SetActive(true);
 
             }
             //Animation3.ResetTrigger("Silly");
@@ -90,6 +93,7 @@ public class Silly : MonoBehaviour
             IsAnimation = false;
             Debug.Log("pasanim");
             BillBoard.SetActive(false);
+            fxGameObject.SetActive(false);
         }
         WasInRange = InRange;
     }
