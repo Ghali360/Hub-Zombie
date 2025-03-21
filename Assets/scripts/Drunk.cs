@@ -30,10 +30,6 @@ public class Drunk : MonoBehaviour
     }
     void Start()
     {
-        Vector3 newPos = transform.position;
-        newPos.y = 0.7f;
-        transform.position = newPos;
-
         Animation1 = GetComponent<Animator>();
 
         audioSource = GetComponent<AudioSource>();
@@ -48,6 +44,8 @@ public class Drunk : MonoBehaviour
 
         BillBoard.SetActive(false);
         fxGameObject.SetActive(false);
+
+        //Animation1.SetTrigger("Idle");
     }
     void PlayandPause()
     {
@@ -63,10 +61,6 @@ public class Drunk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 newPos = transform.position;
-        newPos.y = 0.7f;
-        transform.position = newPos;
-
         float distance = Vector3.Distance(Player.transform.position, transform.position);
         bool InRange = distance < Distance;
         if (InRange)
@@ -94,6 +88,7 @@ public class Drunk : MonoBehaviour
         if (!InRange && WasInRange)
         {
             Animation1.Rebind();
+            //Animation1.SetTrigger("Idle");
             audioSource.Stop();
             IsAnimation = false;
             Debug.Log("pasanim");

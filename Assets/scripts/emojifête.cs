@@ -11,6 +11,6 @@ public class emojifête : MonoBehaviour
     {
     transform.rotation = cam.transform.rotation;
         Vector3 newPos = Perso.transform.position;
-        transform.position = new Vector3(newPos.x + offset.x,newPos.y + offset.y + 2f, newPos.z + offset.z);
+        transform.position = new Vector3(newPos.x + offset.x,newPos.y + offset.y, newPos.z + offset.z);
     }
 }

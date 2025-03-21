@@ -5,7 +5,7 @@ public class excitedAnim : MonoBehaviour
     public GameObject Player;
     public string TriggerName = "Idle";
     public Animator Animation2;
-    float Distance = 2f;
+    [SerializeField] float Distance = 2f;
     bool IsAnimation;
     bool WasInRange;
 

@@ -6,7 +6,7 @@ public class Silly : MonoBehaviour
     public GameObject Player;
     public string TriggerName = "Idle";
     public Animator Animation3;
-    float Distance = 2f;
+    [SerializeField] float Distance = 2f;
     bool IsAnimation = false ;
     bool WasInRange;
 

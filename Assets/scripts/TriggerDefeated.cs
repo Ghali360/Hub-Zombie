@@ -6,7 +6,7 @@ using UnityEngine;
 public class TriggerDefeated : MonoBehaviour
 {
     public GameObject Player;
-    float Distance = 2f;
+    [SerializeField]  float Distance = 2f;
     bool Range;
     public string triggerName = "Idle";
     public Animator Defeat;
