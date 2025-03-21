@@ -18,7 +18,10 @@ public class excitedAnim : MonoBehaviour
     public float pitch;
 
     public AudioSource audioSource;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [Header("Billboard Settings")]
+    public GameObject BillBoard;
+
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -35,6 +38,9 @@ public class excitedAnim : MonoBehaviour
         audioSource.clip = triggerSound;
         audioSource.volume = volume;
         audioSource.pitch = pitch;
+
+        BillBoard.SetActive(false);
+
     }
     void PlayandPause()
     {
@@ -61,7 +67,7 @@ public class excitedAnim : MonoBehaviour
                 IsAnimation = true;
                 PlayandPause();
                 Debug.Log("anim");
-
+                BillBoard.SetActive(true);
             }
             //Animation2.ResetTrigger("Silly");
             if (IsAnimation)
@@ -80,6 +86,7 @@ public class excitedAnim : MonoBehaviour
             audioSource.Stop();
             IsAnimation = false;
             Debug.Log("pasanim");
+            BillBoard.SetActive(false);
         }
         WasInRange = InRange;
     }

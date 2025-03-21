@@ -19,6 +19,9 @@ public class Silly : MonoBehaviour
 
     public AudioSource audioSource;
 
+    [Header("Billboard Settings")]
+    public GameObject BillBoard;
+
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -36,6 +39,8 @@ public class Silly : MonoBehaviour
         audioSource.clip = triggerSound;
         audioSource.volume = volume;
         audioSource.pitch = pitch;
+
+        BillBoard.SetActive(false);
 
     }
 
@@ -64,6 +69,7 @@ public class Silly : MonoBehaviour
                 IsAnimation = true;
                 PlayandPause();
                 Debug.Log("anim");
+                BillBoard.SetActive(true);
 
             }
             //Animation3.ResetTrigger("Silly");
@@ -83,6 +89,7 @@ public class Silly : MonoBehaviour
             audioSource.Stop();
             IsAnimation = false;
             Debug.Log("pasanim");
+            BillBoard.SetActive(false);
         }
         WasInRange = InRange;
     }

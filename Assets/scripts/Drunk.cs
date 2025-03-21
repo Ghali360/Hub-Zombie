@@ -19,7 +19,10 @@ public class Drunk : MonoBehaviour
     public float pitch;
 
     public AudioSource audioSource;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [Header("Billboard Settings")]
+    public GameObject BillBoard;
+
     private void Awake()
     {
         audioSource.playOnAwake = false;
@@ -37,6 +40,9 @@ public class Drunk : MonoBehaviour
         audioSource.clip = triggerSound;
         audioSource.volume = volume;
         audioSource.pitch = pitch;
+
+        BillBoard.SetActive(false);
+
     }
     void PlayandPause()
     {
@@ -62,7 +68,7 @@ public class Drunk : MonoBehaviour
                 IsAnimation = true;
                 PlayandPause();
                 Debug.Log("anim");
-
+                BillBoard.SetActive(true);
             }
             //Animation1.ResetTrigger("Silly");
             if (IsAnimation)
@@ -81,6 +87,7 @@ public class Drunk : MonoBehaviour
             audioSource.Stop();
             IsAnimation = false;
             Debug.Log("pasanim");
+            BillBoard.SetActive(false);
         }
         WasInRange = InRange;
     }
